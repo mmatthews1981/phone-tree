@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>phone tree</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div ng-app="phonetree" ng-controller="appController as app">
+        <h1>{{app.title}}</h1>
+        <div class="container">
+
+            <div ng-include="'ducky.html'"></div>
+
+            <div ng-include="'phone.html'"></div>
+
+            <div ng-include="'calculator.html'"></div>
+
+        </div>
+        <script src="js/howler.min.js"></script>
+        <script src='js/angular.js'></script>
+        <script  src="js/index.js"></script>
+
+    </body>
+
+    </html>

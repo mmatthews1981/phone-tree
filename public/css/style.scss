@@ -125,16 +125,97 @@ h1 {
         background-size: contain;
         height: 48px;
         width: 48px;
-        position: relative;
+        position: absolute;
         top: 42%;
         left: 46%;
         cursor: pointer;
+
         &.open {
             height: 400px;
             width: 400px;
             top: 15%;
             left: 31%;
         }
+    }
+    .calculator{
+        position: absolute;
+        background-color: lightgray;
+        border-radius: 3px;
+        top: 51%;
+        left: 58%;
+        height: 50px;
+        width: 50px;
+        padding: 3px;
+        transform: rotatex(59deg) rotatey(0deg) rotatez(180deg) skewx(-4deg) skewy(0deg);
+        overflow: hidden;
+        transition: all .5s;
+        cursor: pointer;
+        input{
+            display: block;
+            text-align: right;
+            margin-bottom: -8px;
+            font-size: 8px;
+            width: 46px;
+        }
+        button{
+            color: white;
+            background-color: black;
+            border-radius: 1px;
+            padding: 4px;
+            /* width: 46px; */
+            border: none;
+            font-size: 3px;
+            margin: -1px -1px -1px 0px;
+            &.bigger{
+                width: 22px;
+                font-size: 2px;
+            }
+        }
+
+        &.open{
+            border-radius: 15px;
+            padding: 25px;
+            top: 18%;
+            left: 40%;
+            height: 275px;
+            width: 195px;
+            z-index: 3;
+            transform: rotatex(0deg) rotatey(0deg) rotatez(0deg) skewx(0deg) skewy(0deg);
+            input{
+                display: block;
+                text-align: right;
+                margin-bottom: 25px;
+                font-size: 24px;
+                width: 190px;
+            }
+            button{
+                color: white;
+                background-color: black;
+                border-radius: 5px;
+                padding: 10px;
+                width: 46px;
+                font-size: initial;
+                border-width: 2px;
+                border-style: outset;
+                border-color: buttonface;
+                border-image: initial;
+                outline: none;
+                margin-bottom: 3px;
+                &.bigger{
+                    width: 96px;
+                    font-size: initial;
+                }
+            }
+        }
+
+    }
+    .closecalc{
+        position: absolute;
+        left: 42%;
+        top: 72%;
+        color: lightgray;
+        font-weight: 700;
+        cursor: pointer;
     }
 
 }

@@ -101,7 +101,7 @@ h1 {
     background-size: contain;
     height: 48px;
     width: 48px;
-    position: relative;
+    position: absolute;
     top: 42%;
     left: 46%;
     cursor: pointer; }
@@ -110,5 +110,74 @@ h1 {
       width: 400px;
       top: 15%;
       left: 31%; }
+  .container .calculator {
+    position: absolute;
+    background-color: lightgray;
+    border-radius: 3px;
+    top: 51%;
+    left: 58%;
+    height: 50px;
+    width: 50px;
+    padding: 3px;
+    transform: rotatex(59deg) rotatey(0deg) rotatez(180deg) skewx(-4deg) skewy(0deg);
+    overflow: hidden;
+    transition: all .5s;
+    cursor: pointer; }
+    .container .calculator input {
+      display: block;
+      text-align: right;
+      margin-bottom: -8px;
+      font-size: 8px;
+      width: 46px; }
+    .container .calculator button {
+      color: white;
+      background-color: black;
+      border-radius: 1px;
+      padding: 4px;
+      /* width: 46px; */
+      border: none;
+      font-size: 3px;
+      margin: -1px -1px -1px 0px; }
+      .container .calculator button.bigger {
+        width: 22px;
+        font-size: 2px; }
+    .container .calculator.open {
+      border-radius: 15px;
+      padding: 25px;
+      top: 18%;
+      left: 40%;
+      height: 275px;
+      width: 195px;
+      z-index: 3;
+      transform: rotatex(0deg) rotatey(0deg) rotatez(0deg) skewx(0deg) skewy(0deg); }
+      .container .calculator.open input {
+        display: block;
+        text-align: right;
+        margin-bottom: 25px;
+        font-size: 24px;
+        width: 190px; }
+      .container .calculator.open button {
+        color: white;
+        background-color: black;
+        border-radius: 5px;
+        padding: 10px;
+        width: 46px;
+        font-size: initial;
+        border-width: 2px;
+        border-style: outset;
+        border-color: buttonface;
+        border-image: initial;
+        outline: none;
+        margin-bottom: 3px; }
+        .container .calculator.open button.bigger {
+          width: 96px;
+          font-size: initial; }
+  .container .closecalc {
+    position: absolute;
+    left: 42%;
+    top: 72%;
+    color: lightgray;
+    font-weight: 700;
+    cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

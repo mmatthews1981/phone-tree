@@ -24,6 +24,7 @@ angular.module('phonetree', []);
 
 angular.module('phonetree')
     .controller('appController', appController)
+    .controller('calcController', calcController)
     .controller('phoneController', phoneController);
 
 function appController($timeout){
@@ -50,6 +51,40 @@ function appController($timeout){
 
 }
 
+function calcController(){
+    var calc = this;
+    calc.calcOpen = false;
+    calc.output = 0;
+
+    calc.click = function(val){
+        if(calc.output !== 0) {
+            calc.output += val;
+        } else {
+            calc.output = val;
+        }       
+    }
+
+    calc.result = function(){
+        calc.output = eval(calc.output);
+    }
+
+    calc.clear = function(){
+        calc.output = 0;
+    }
+    
+    calc.delete = function(){
+        calc.output = calc.output.slice(0, -1);
+    }
+
+    calc.pickUp = function(){
+        calc.calcOpen = true;
+    }
+
+    calc.close = function(){
+        calc.calcOpen = false;
+    }
+}
+
 function phoneController($scope) {
     var vm = this;
     var howlerlist = {};
@@ -70,21 +105,18 @@ function phoneController($scope) {
 
     howlerlist.menu = new Howl({
         src: ['menu.mp3'],
-        volume: 0.5,
-        onload: function(){console.log('menu loaded');}
+        volume: 0.5
     });
 
     howlerlist.hold1 = new Howl({
         src: ['hold1.mp3'],
         volume: 0.5,
-        loop: true,
-        onload: function(){console.log('hold1 loaded');}
+        loop: true
     });
 
     howlerlist.hold2 = new Howl({
         src: ['hold2.mp3'],
-        volume: 0.5,
-        onload: function(){console.log('hold2 loaded');}
+        volume: 0.5
     });
 
     howlerlist.lick = new Howl({
@@ -92,8 +124,7 @@ function phoneController($scope) {
         volume: 0.5,
         onend: function(){
             vm.display = displayReset;
-        },
-        onload: function(){console.log('lick loaded');}
+        }
     });
 
     howlerlist.ringback = new Howl({
@@ -103,8 +134,7 @@ function phoneController($scope) {
             if(vm.connected){
                 howlerlist.menu.play();
             }
-        },
-        onload: function(){console.log('ringback loaded');}
+        }
     });
 
     howlerlist.errormsg = new Howl({
@@ -116,21 +146,18 @@ function phoneController($scope) {
             vm.queueEntered = false;
             vm.punished = false;
             $scope.$apply();
-            },
-        onload: function(){console.log('error loaded');}
+            }
         });
 
     howlerlist.soundErrormsg = new Howl({
           src: ['ringback.wav'],
           volume: 0.3,
-          onend: function(){ howlerlist.errormsg.play(); },
-          onload: function(){console.log('ringback loaded again');}
+          onend: function(){ howlerlist.errormsg.play(); }
         });
 
     howlerlist.ringbacklong = new Howl({
         src: ['ringback-long.mp3'],
         volume: 0.3,
-        onload: function(){console.log('ringbacklong loaded');},
         onend: function(){howlerlist.menu.play(); vm.disabled = false;}
     });
 
