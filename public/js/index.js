@@ -1,5 +1,5 @@
 /* 
-How to win:
+How to finish (it used to say win, but it's not really winning, is it?):
 
 dial 555-1212, CONNECTED
 press 4 for customer service, plays main hold recording. QUEUEENTERED
@@ -34,7 +34,7 @@ function appController($timeout){
     app.duckOpen = false;
 
     var ducksqueak = new Howl({
-        src: ['duck.mp3']
+        src: ['audio/duck.mp3']
     });
 
     app.duck = function(){
@@ -104,23 +104,23 @@ function phoneController($scope) {
     var displayReset = 'Connected';
 
     howlerlist.menu = new Howl({
-        src: ['menu.mp3'],
+        src: ['audio/menu.mp3'],
         volume: 0.5
     });
 
     howlerlist.hold1 = new Howl({
-        src: ['hold1.mp3'],
+        src: ['audio/hold1.mp3'],
         volume: 0.5,
         loop: true
     });
 
     howlerlist.hold2 = new Howl({
-        src: ['hold2.mp3'],
+        src: ['audio/hold2.mp3'],
         volume: 0.5
     });
 
     howlerlist.lick = new Howl({
-        src: ['lick2.mp3'],
+        src: ['audio/lick2.mp3'],
         volume: 0.5,
         onend: function(){
             vm.display = displayReset;
@@ -128,7 +128,7 @@ function phoneController($scope) {
     });
 
     howlerlist.ringback = new Howl({
-        src: ['ringback.wav'],
+        src: ['audio/ringback.wav'],
         volume: 0.3,
         onend: function(){
             if(vm.connected){
@@ -138,7 +138,7 @@ function phoneController($scope) {
     });
 
     howlerlist.errormsg = new Howl({
-        src: ['complete3-bell-f1.mp3'],
+        src: ['audio/complete3-bell-f1.mp3'],
         volume: 0.3,
         onend: function(){
             vm.display = '';
@@ -150,13 +150,13 @@ function phoneController($scope) {
         });
 
     howlerlist.soundErrormsg = new Howl({
-          src: ['ringback.wav'],
+          src: ['audio/ringback.wav'],
           volume: 0.3,
           onend: function(){ howlerlist.errormsg.play(); }
         });
 
     howlerlist.ringbacklong = new Howl({
-        src: ['ringback-long.mp3'],
+        src: ['audio/ringback-long.mp3'],
         volume: 0.3,
         onend: function(){howlerlist.menu.play(); vm.disabled = false;}
     });
