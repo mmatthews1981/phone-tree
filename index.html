@@ -2,13 +2,90 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Phone Tree</title>
     <link rel="stylesheet" href="css/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div ng-app="phonetree" ng-controller="appController as app">
-        <h1>{{app.title}}</h1>
+
+    <div class="m-app-loading">
+
+        <!--
+            HACKY CODE WARNING: I'm putting Style block inside directive so that it
+            will be removed from the DOM when we remove the directive container.
+        -->
+        <style type="text/css">
+            div.m-app-loading {
+                position: fixed ;
+                z-index: 10;
+                overflow: hidden;
+            }
+            div.m-app-loading div.animated-container {
+                background-color: #333333 ;
+                bottom: 0px ;
+                left: 0px ;
+                position: fixed ;
+                right: 0px ;
+                top: 0px ;
+                z-index: 999999 ;
+                opacity: 1.0 ;
+                transition: all linear 2000ms ;
+                    -webkit-transition: all linear 2000ms ;
+            }
+            /* Used to initialize the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave {
+                
+            }
+            /* Used to set the end properties of the ng-leave animation state. */
+            div.m-app-loading div.animated-container.fadeout {
+                opacity: 0 ;
+            }
+            div.m-app-loading div.messaging {
+                color: #FFFFFF ;
+                font-family: monospace ;
+                left: 0px ;
+                margin-top: -37px ;
+                position: absolute ;
+                right: 0px ;
+                text-align: center ;
+                top: 50% ;
+            }
+            div.m-app-loading h1 {
+                font-size: 26px ;
+                line-height: 35px ;
+                margin: 0px 0px 20px 0px ;
+            }
+            div.m-app-loading p {
+                font-size: 18px ;
+                line-height: 14px ;
+                margin: 0px 0px 0px 0px ;
+            }
+        </style>
+
+
+        <!-- BEGIN: Actual animated container. -->
+        <div ng-if="app.titlecard" ng-class="{'fadeout': app.fadeout}" ng-click="app.start();" class="animated-container" ng-cloak>
+
+            <div class="messaging">
+
+                <h1>
+                    {{app.title}}
+                </h1>
+
+                <p>
+                    {{app.subtitle}}
+                </p>
+
+            </div>
+
+        </div>
+        <!-- END: Actual animated container. -->
+
+    </div>
+    <!-- END: App-Loading Screen. -->
+
+
         <div class="container">
 
             <div ng-include="'ducky.html'"></div>

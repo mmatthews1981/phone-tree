@@ -29,9 +29,22 @@ angular.module('phonetree')
 
 function appController($timeout){
     var app = this;
-    app.title = 'call 555-1212';
+    app.title = 'Phone Tree';
+    app.subtitle = 'click anywhere to begin';
     app.phoneOpen = false;
     app.duckOpen = false;
+
+    app.titlecard = true;
+    app.fadeout = false;
+
+    app.start = function(){
+        // fade out the intro
+        app.fadeout = true;
+        $timeout(function(){
+            //remove the titlecard after it's faded
+            app.titlecard = false;
+        }, 2000);
+    };
 
     var ducksqueak = new Howl({
         src: ['audio/duck.mp3']
