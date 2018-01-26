@@ -1,3 +1,6 @@
+@font-face {
+  font-family: "rocksalt";
+  src: url(RockSalt-Regular.ttf); }
 h1 {
   text-align: center; }
 
@@ -26,7 +29,8 @@ h1 {
       width: 200px;
       transform: rotatex(0deg) rotatey(0deg) rotatez(0deg) skewx(0deg) skewy(0deg);
       top: 15%;
-      left: 45%; }
+      left: 45%;
+      z-index: 4; }
     .container .phone .screen {
       width: 100%;
       height: 82%;
@@ -109,7 +113,30 @@ h1 {
       height: 400px;
       width: 400px;
       top: 15%;
-      left: 31%; }
+      left: 31%;
+      z-index: 3; }
+  .container .sticky {
+    background-image: url(../sticky.png);
+    background-size: contain;
+    height: 50px;
+    width: 65px;
+    position: absolute;
+    top: 39%;
+    left: 74%;
+    cursor: pointer;
+    font-size: 4px;
+    font-family: 'rocksalt'; }
+    .container .sticky .note {
+      margin-top: 19%;
+      margin-left: 18%;
+      transform: rotatez(-7deg); }
+    .container .sticky.open {
+      height: 320px;
+      width: 400px;
+      top: 20%;
+      left: 31%;
+      z-index: 3;
+      font-size: 24px; }
   .container .calculator {
     position: absolute;
     background-color: lightgray;

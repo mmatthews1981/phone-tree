@@ -1,7 +1,7 @@
 /* 
 How to finish (it used to say win, but it's not really winning, is it?):
 
-dial 555-1212, CONNECTED
+dial 555-1092, CONNECTED
 press 4 for customer service, plays main hold recording. QUEUEENTERED
 main hold recording will loop indefinitely until you ragequit and press 0
 the recording will shame you for ragequitting, and return you to the main menu PUNISHED
@@ -27,15 +27,17 @@ angular.module('phonetree')
     .controller('calcController', calcController)
     .controller('phoneController', phoneController);
 
-function appController($timeout){
+function appController($scope,$timeout){
     var app = this;
     app.title = 'Phone Tree';
-    app.subtitle = 'click anywhere to begin';
+    app.subtitle = '(click anywhere to begin)';
     app.phoneOpen = false;
     app.duckOpen = false;
+    app.stickyOpen = false;
 
     app.titlecard = true;
     app.fadeout = false;
+    app.fadeback = false;
 
     app.start = function(){
         // fade out the intro
@@ -55,12 +57,26 @@ function appController($timeout){
         if(app.duckOpen){ducksqueak.play();};
     };
 
+    app.sticky = function(){
+        app.stickyOpen = !app.stickyOpen;
+    };
+
     app.phone = function(){
         app.phoneOpen = true;
         $timeout(function(){
             app.phoneReady = true;
         }, 600);
     };
+
+    $scope.$on('endcard', function(event, data) {
+        app.subtitle = "A game by Braindouche. You many now hang up."
+        $timeout(function(){
+            app.titlecard = true;
+            $timeout(function(){
+                app.fadeback = true;
+                }, 1000);
+            }, 230000);
+    });
 
 }
 
@@ -262,15 +278,13 @@ function phoneController($scope) {
         }
     }
 
-    
-
     vm.submit = function(display){
 
         Object.keys(howlerlist).forEach(function(key) {
                 howlerlist[key].stop();
             });
 
-        if(display === '5551212' && !vm.connected ){
+        if(display === '5551092' && !vm.connected ){
             //connect
             vm.connected = true;
             vm.display = displayReset;
@@ -296,7 +310,8 @@ function phoneController($scope) {
     function onHold(){
         howlerlist.hold2.play();
         vm.punished = true; 
-        vm.display = "you don't listen to instructions very well.";
+
+        $scope.$emit('endcard', true);
     }
 
     function onLick(val){
@@ -316,7 +331,7 @@ function phoneController($scope) {
         '1': function(){ howlerlist.ringbacklong.play(); vm.disabled = true; vm.display = displayReset; },
         '2': function(){ howlerlist.ringbacklong.play(); vm.disabled = true; vm.display = displayReset; },
         '3': function(){ howlerlist.ringbacklong.play(); vm.disabled = true; vm.display = displayReset; },
-        '4': function(){ holdHandler(); }, //determine whether to play main hold or final hold
+        '4': function(){ howlerlist.hold1.play(); vm.queueEntered = true; vm.display = 'please hold'; }, 
         '5': function(){ howlerlist.lick.play(); vm.lick = true; },
         '6': function(){ howlerlist.menu.play(); },
         '7': function(){ howlerlist.menu.play(); },
@@ -326,22 +341,5 @@ function phoneController($scope) {
         '*': function(){ howlerlist.menu.play(); },
         '#': function(){ howlerlist.menu.play(); }
     };
-
-    function holdHandler(){
-        if(vm.punished){
-            //final hold recording
-            vm.display = 'please continue to hold.';
-            alert('thank you for holding.');
-            alert('you will never speak to a human.');
-            alert('the end.');
-            vm.theEnd = '(the end.)';
-        } else {
-            //main hold recording
-            howlerlist.hold1.play();
-            vm.queueEntered = true; 
-            vm.display = 'please hold...';
-        }
-        
-    }
 
 }

@@ -40,6 +40,11 @@
             /* Used to set the end properties of the ng-leave animation state. */
             div.m-app-loading div.animated-container.fadeout {
                 opacity: 0 ;
+                transition: all linear 2000ms ;
+                    -webkit-transition: all linear 2000ms ;
+            }
+            div.m-app-loading div.animated-container.fadeback {
+              opacity: 1;
             }
             div.m-app-loading div.messaging {
                 color: #FFFFFF ;
@@ -65,7 +70,7 @@
 
 
         <!-- BEGIN: Actual animated container. -->
-        <div ng-if="app.titlecard" ng-class="{'fadeout': app.fadeout}" ng-click="app.start();" class="animated-container" ng-cloak>
+        <div ng-show="app.titlecard" ng-class="{'fadeout': app.fadeout, 'fadeback': app.fadeback}" ng-click="!app.fadeback && app.start()" class="animated-container" ng-cloak>
 
             <div class="messaging">
 
@@ -89,6 +94,8 @@
         <div class="container">
 
             <div ng-include="'ducky.html'"></div>
+
+            <div ng-include="'sticky.html'"></div>
 
             <div ng-include="'phone.html'"></div>
 
